@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment_menu_add">
+
+    <ImageButton
+        android:id="@+id/addMenu_backArrow_image"
+        android:layout_width="66dp"
+        android:layout_height="58dp"
+        android:background="@drawable/ic_baseline_arrow_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/menuAddFragment_saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/white"
+        android:backgroundTintMode="add"
+        android:text="확인"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/addMenu_title_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addMenu_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="676dp"
+        android:text="메뉴 추가"
+        android:textSize="35dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.304"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMenu_backArrow_image">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/addMenu_menuName_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:text="메뉴 이름"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/addMenu_menuName_editText"
+                android:layout_width="248dp"
+                android:layout_height="43dp"
+                android:hint="메뉴 이름을 입력하세요. ex) 라면"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/addMenu_menuPrice_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="가격"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/addMenu_menuPrice_editText"
+                android:layout_width="248dp"
+                android:layout_height="43dp"
+                android:hint="가격을 입력하세요. ex) 2000"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/addMenu_menuOption_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="옵션"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/addMenu_menuOption_editText"
+                    android:layout_width="198dp"
+                    android:layout_height="40dp"
+                    android:hint="옵션을 입력하세요. ex) 계란"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/addMenu_menuOption_editText2"
+                    android:layout_width="83dp"
+                    android:layout_height="40dp"
+                    android:hint="가격"
+                    android:textSize="15dp" />
+
+                <ImageButton
+                    android:id="@+id/menuAddFragment_optionAddButton"
+                    android:layout_width="42dp"
+                    android:layout_height="39dp"
+                    android:layout_marginStart="0dp"
+                    android:background="@drawable/ic_baseline_add" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addMenu_menuOption_rcv"
+                android:layout_width="339dp"
+                android:layout_height="wrap_content"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarSize="5dp"
+                android:scrollbarThumbVertical="@color/gray" />
+
+            <TextView
+                android:id="@+id/addMenu_menuImage_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="메뉴 이미지"
+                android:textSize="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/menuAddFragment_loadImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginVertical="10dp"
+                    android:backgroundTint="@color/gray"
+                    android:backgroundTintMode="add"
+                    android:text="이미지 불러오기"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/menuAddFragment_menuImageNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="7dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="8dp"
+                    android:text="이미지 파일 이름"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

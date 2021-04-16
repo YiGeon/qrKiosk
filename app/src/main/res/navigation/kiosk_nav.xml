@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/kiosk_nav"
+    app:startDestination="@id/fragment_store_managing">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.buildteam.qrkiosk.fragment_home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_sign_up"
+            app:destination="@id/fragment_sign_up" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_sign_in"
+            app:destination="@id/fragment_sign_in" />
+    </fragment>
+    <action android:id="@+id/action_global_fragment_home" app:destination="@id/fragment_home" />
+    <fragment
+        android:id="@+id/fragment_sign_up"
+        android:name="com.buildteam.qrkiosk.fragment_sign_up"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_fragment_sign_up_to_fragment_terms_and_conditions_01"
+            app:destination="@id/fragment_terms_and_conditions_01" />
+        <action
+            android:id="@+id/action_fragment_sign_up_to_fragment_terms_and_conditions_02"
+            app:destination="@id/fragment_terms_and_conditions_02" />
+        <action
+            android:id="@+id/action_fragment_sign_up_to_fragment_sign_up_complete"
+            app:destination="@id/fragment_sign_up_complete" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_terms_and_conditions_01"
+        android:name="com.buildteam.qrkiosk.fragment_terms_and_conditions_01"
+        android:label="fragment_terms_and_conditions_01"
+        tools:layout="@layout/fragment_terms_and_conditions_01" >
+        <action
+            android:id="@+id/action_fragment_terms_and_conditions_01_to_fragment_sign_up"
+            app:destination="@id/fragment_sign_up" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_terms_and_conditions_02"
+        android:name="com.buildteam.qrkiosk.fragment_terms_and_conditions_02"
+        android:label="fragment_terms_and_conditions_02"
+        tools:layout="@layout/fragment_terms_and_conditions_02" >
+        <action
+            android:id="@+id/action_fragment_terms_and_conditions_02_to_fragment_sign_up"
+            app:destination="@id/fragment_sign_up" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_sign_up_complete"
+        android:name="com.buildteam.qrkiosk.fragment_sign_up_complete"
+        android:label="fragment_sign_up_complete"
+        tools:layout="@layout/fragment_sign_up_complete" >
+        <action
+            android:id="@+id/action_fragment_sign_up_complete_to_fragment_sign_in"
+            app:destination="@id/fragment_sign_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_sign_in"
+        android:name="com.buildteam.qrkiosk.fragment_sign_in"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_fragment_sign_in_to_fragment_sign_up"
+            app:destination="@id/fragment_sign_up" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_event_list"
+        android:name="com.buildteam.qrkiosk.fragment_event_list"
+        android:label="fragment_event_list"
+        tools:layout="@layout/fragment_event_list" >
+        <action
+            android:id="@+id/action_fragment_event_list_to_fragment_event_add"
+            app:destination="@id/fragment_event_add" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_event_add"
+        android:name="com.buildteam.qrkiosk.fragment_event_add"
+        android:label="fragment_event_add"
+        tools:layout="@layout/fragment_event_add" >
+        <action
+            android:id="@+id/action_fragment_event_add_to_fragment_event_info"
+            app:destination="@id/fragment_event_info" />
+        <action
+            android:id="@+id/action_fragment_event_add_to_fragment_event_list"
+            app:destination="@id/fragment_event_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_event_info"
+        android:name="com.buildteam.qrkiosk.fragment_event_info"
+        android:label="fragment_event_info"
+        tools:layout="@layout/fragment_event_info" >
+        <action
+            android:id="@+id/action_fragment_event_info_to_fragment_event_add"
+            app:destination="@id/fragment_event_add" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_menu_add"
+        android:name="com.buildteam.qrkiosk.fragment_menu_add"
+        android:label="fragment_menu_add"
+        tools:layout="@layout/fragment_menu_add" />
+    <fragment
+        android:id="@+id/fragment_store_managing"
+        android:name="com.buildteam.qrkiosk.fragment_store_managing"
+        android:label="fragment_store_managing"
+        tools:layout="@layout/fragment_store_managing" >
+        <action
+            android:id="@+id/action_fragment_store_managing_to_fragment_store_add"
+            app:destination="@id/fragment_store_add" />
+        <action
+            android:id="@+id/action_fragment_store_managing_to_fragment_store_select"
+            app:destination="@id/fragment_store_select" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_store_add"
+        android:name="com.buildteam.qrkiosk.fragment_store_add"
+        android:label="fragment_store_add"
+        tools:layout="@layout/fragment_store_add" />
+    <action android:id="@+id/action_global_fragment_store_managing" app:destination="@id/fragment_store_managing" />
+    <fragment
+        android:id="@+id/fragment_store_select"
+        android:name="com.buildteam.qrkiosk.fragment_store_select"
+        android:label="fragment_store_select"
+        tools:layout="@layout/fragment_store_select" >
+        <action
+            android:id="@+id/action_fragment_store_select_to_fragment_event_list"
+            app:destination="@id/fragment_event_list" />
+    </fragment>
+</navigation>

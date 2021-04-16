@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="198dp"
+        android:layout_height="40dp"
+        android:hint="옵션을 입력하세요."
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/et_price"
+        android:layout_width="83dp"
+        android:layout_height="40dp"
+        android:hint="가격"
+        android:textSize="15dp" />
+
+    <ImageButton
+        android:id="@+id/ib_profile"
+        android:layout_width="42dp"
+        android:layout_height="39dp"
+        android:background="@drawable/ic_baseline_horizontal_rule"
+        tools:layout_marginStart="30dp" />
+</LinearLayout>
