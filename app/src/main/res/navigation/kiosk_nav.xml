@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/kiosk_nav"
-    app:startDestination="@id/fragment_store_managing">
+    app:startDestination="@id/fragment_home">
 
     <fragment
         android:id="@+id/fragment_home"
@@ -24,40 +24,7 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up">
         <action
-            android:id="@+id/action_fragment_sign_up_to_fragment_terms_and_conditions_01"
-            app:destination="@id/fragment_terms_and_conditions_01" />
-        <action
-            android:id="@+id/action_fragment_sign_up_to_fragment_terms_and_conditions_02"
-            app:destination="@id/fragment_terms_and_conditions_02" />
-        <action
-            android:id="@+id/action_fragment_sign_up_to_fragment_sign_up_complete"
-            app:destination="@id/fragment_sign_up_complete" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_terms_and_conditions_01"
-        android:name="com.buildteam.qrkiosk.fragment_terms_and_conditions_01"
-        android:label="fragment_terms_and_conditions_01"
-        tools:layout="@layout/fragment_terms_and_conditions_01" >
-        <action
-            android:id="@+id/action_fragment_terms_and_conditions_01_to_fragment_sign_up"
-            app:destination="@id/fragment_sign_up" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_terms_and_conditions_02"
-        android:name="com.buildteam.qrkiosk.fragment_terms_and_conditions_02"
-        android:label="fragment_terms_and_conditions_02"
-        tools:layout="@layout/fragment_terms_and_conditions_02" >
-        <action
-            android:id="@+id/action_fragment_terms_and_conditions_02_to_fragment_sign_up"
-            app:destination="@id/fragment_sign_up" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_sign_up_complete"
-        android:name="com.buildteam.qrkiosk.fragment_sign_up_complete"
-        android:label="fragment_sign_up_complete"
-        tools:layout="@layout/fragment_sign_up_complete" >
-        <action
-            android:id="@+id/action_fragment_sign_up_complete_to_fragment_sign_in"
+            android:id="@+id/action_fragment_sign_up_to_fragment_sign_in"
             app:destination="@id/fragment_sign_in" />
     </fragment>
     <fragment

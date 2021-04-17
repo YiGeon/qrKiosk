@@ -1,66 +1,74 @@
 package com.buildteam.qrkiosk;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-public class fragment_sign_in extends Fragment {
-    private String loginId = "";
-    private String loginPassword = "";
+import com.buildteam.qrkiosk.asset.AbstractFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-    private Button signInButton, signUpButton;
+public class fragment_sign_in extends AbstractFragment {
 
-    public fragment_sign_in() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_in, container, false);
-    }
+    //Associate
+    //View
+    private EditText Login_Email_EditText, Login_Password_EditText;
+    private Button Login_Login_Button;
+    private TextView Login_FindID_TextView, Login_ResetPassword_TextView, Login_SignUp_TextView;
+    //Model
+    private FirebaseAuth mAuth;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.signInButton = view.findViewById(R.id.signInFragment_signInButton);
-        this.signUpButton = view.findViewById(R.id.signInFragment_signUpButton);
+    protected int getViewId() {
+        return R.layout.fragment_sign_in;
+    }
 
+    @Override
+    protected void associate(View view) {
+        this.Login_Email_EditText = view.findViewById(R.id.Login_Email_EditText);
+        this.Login_Password_EditText = view.findViewById(R.id.Login_Password_EditText);
+        this.Login_Login_Button = view.findViewById(R.id.Login_Login_Button);
+        this.Login_FindID_TextView = view.findViewById(R.id.Login_FindID_TextView);
+        this.Login_ResetPassword_TextView = view.findViewById(R.id.Login_ResetPassword_TextView);
+        this.Login_SignUp_TextView = view.findViewById(R.id.Login_SignUp_TextView);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText idText = view.findViewById(R.id.signInFragment_loginId);
-                loginId = idText.getText().toString();
+        this.mAuth = FirebaseAuth.getInstance();
+    }
 
-                EditText passwordText = view.findViewById(R.id.signInFragment_loginPassword);
-                loginPassword = passwordText.getText().toString();
+    @Override
+    protected void initialize() {
+        this.Login_Login_Button.setOnClickListener(v -> this.login());
+//        this.Login_FindID_TextView.setOnClickListener(v -> this.navigateTo(R.id.action_login_to_findId));
+//        this.Login_ResetPassword_TextView.setOnClickListener(v -> this.navigateTo(R.id.action_login_to_resetPassword));
+        this.Login_SignUp_TextView.setOnClickListener(v -> this.navigateTo(R.id.action_fragment_sign_in_to_fragment_sign_up));
+    }
 
+    private void login() {
+        String email = this.Login_Email_EditText.getText().toString();
+        String password = this.Login_Password_EditText.getText().toString();
 
-                Navigation.findNavController(view).navigate(R.id.action_global_fragment_home);
-            }
-        });
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this.getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment_sign_in_to_fragment_sign_up);
-            }
-        });
+                            LoginDirections.ActionLoginToMain action = LoginDirections.actionLoginToMain(email);
+                            Navigation.findNavController(getView()).navigate(action);
+
+                            Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Login Fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

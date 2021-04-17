@@ -1,61 +1,76 @@
 package com.buildteam.qrkiosk;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
+
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import com.buildteam.qrkiosk.Enum.eSignUp;
+import com.buildteam.qrkiosk.asset.AbstractFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class fragment_sign_up extends Fragment {
 
-    private Button completeButton, TermsAndConditions01, TermsAndConditions02;
+public class fragment_sign_up extends AbstractFragment {
+
+    private Button SignUp_SignUp_Button, SginUp_Back_Button;
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        //ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_sign_up, container, false)
-        return inflater.inflate(R.layout.fragment_sign_up, container, false);
+    protected int getViewId() {
+        return R.layout.fragment_sign_up;
     }
 
+    @Override
+    protected void associate(View view) {
+        for(com.buildteam.qrkiosk.Enum.eSignUp eSignUp : eSignUp.values()) {
+            eSignUp.setEditText(view.findViewById(eSignUp.getId()));
+        }
+        this.SignUp_SignUp_Button = view.findViewById(R.id.SignUp_SignUp_Button);
+        this.SginUp_Back_Button = view.findViewById(R.id.SginUp_Back_Button);
+
+        this.mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+    }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void initialize() {
+        this.SignUp_SignUp_Button.setOnClickListener(v -> this.singUp());
+        this.SginUp_Back_Button.setOnClickListener(v -> this.navigateTo(R.id.action_fragment_sign_up_to_fragment_sign_in));
+    }
 
-        this.completeButton = view.findViewById(R.id.signUpFragment_completeButton);
-        /*
-        this.TermsAndConditions01 = view.findViewById(R.id.TermsAndConditionsButton_01);
-        this.TermsAndConditions02 = view.findViewById(R.id.TermsAndConditionsButton_02);
-        */
-        //회원가입 완료 버튼
-        this.completeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment_sign_up_to_fragment_sign_up_complete);
-            }
-        });
+    private void singUp() {
+        String email = eSignUp.email.getEditText().getText().toString();
+        String password = eSignUp.password.getEditText().getText().toString();
+        String recheckPassword = eSignUp.receckPassword.getEditText().getText().toString();
+        String name = eSignUp.name.getEditText().getText().toString();
 
-        /*
-        //이용약관 보기버튼
-        this.TermsAndConditions01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment_sign_up_to_fragment_TermsAndConditions_01);
-            }
-        });
+        User user = new User(email, password, name);
 
-        //개인정보취급약관 보기버튼
-        this.TermsAndConditions02.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment_sign_up_to_fragment_TermsAndConditions_02);
+        mDatabase.push().setValue(user);
+
+        if(email.isEmpty()) {
+            Toast.makeText(this.getContext(), "이메일을 입력해 주세요", Toast.LENGTH_SHORT).show();
+        } else {
+            if (password.equals(recheckPassword)) {
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this.getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        this.navigateTo(R.id.action_fragment_sign_up_to_fragment_sign_in);
+                        Toast.makeText(this.getContext(), email + ", " + password + "로 회원가입 완료! " + task.getResult().getUser().getUid(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this.getContext(), "회원가입 실패! " + task.getException(), Toast.LENGTH_SHORT).show();
+                        Log.d("TEST123", task.getException() + "");
+                    }
+                });
+            } else {
+                Toast.makeText(this.getContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
             }
-        });
-         */
+        }
+
+
     }
 }

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 30
@@ -29,6 +31,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.google.firebase:firebase-auth:20.0.4'
+    implementation 'com.google.firebase:firebase-database:19.7.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
